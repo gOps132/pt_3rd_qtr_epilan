@@ -3,7 +3,7 @@
 .m-content {
     display: flex;
     justify-content: center;
-    color: var(--text-primary);
+    color: var(--text-secondary);
     text-align: center;
 }
 
@@ -25,33 +25,7 @@ iframe {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=.2);
 }
 
-footer.m-footer {
-    display: flex;
-    justify-content: center;
-
-    /* height: 20vh; */
-    padding: 2rem;
-
-    color: var(--text-primary); 
-    background-color: var(--bg-primary);
-    
-    font-size: 0.7rem;
-}
-
-.m-footer-elm {
-    margin-left: 1rem;
-    margin-right: 1rem;
-
-    border-color: var(--b-bg-primary);
-
-    width: 30vh;
-}
-
 @media only screen and (max-width: 600px) {
-    footer.m-footer {
-        padding-bottom: 8rem;
-    }
-
     .m-content {
 		display: flex;
 		flex-direction: column;

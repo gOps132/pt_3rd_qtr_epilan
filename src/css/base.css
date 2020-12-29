@@ -30,12 +30,17 @@ body::-webkit-scrollbar-thumb {
 }
 
 main {
-	margin-left: 3rem;
-	padding: 1rem;
+	height: 100vh;
+	width: 100vw;
+
+	/* z-index: 1; */
+
+	margin-left: 5rem;
+	background-color: var(--b-bg-primary);
 }
 
 .dark {
-	--text-primary: #b6b6b6;
+	--text-primary: #3f3c3c;
 	--text-secondary: #ececec;
 	--bg-primary: #23232e;
 	--bg-secondary: #141418;

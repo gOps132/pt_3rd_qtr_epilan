@@ -1,0 +1,48 @@
+@import url('./base.css');
+
+footer.m-footer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    /* position: sticky; */
+    top: 0; 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+    padding: 2rem;
+
+    color: var(--text-primary); 
+    background-color: var(--bg-primary);
+    
+    font-size: 0.7rem;
+}
+
+.m-footer-elm {
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    color: var(--text-primary);
+    border-color: var(--b-bg-primary);
+
+    width: 40vh;
+}
+
+/* .m-footer-elm > *:hover {
+    transition: width 600ms ease;
+	filter: grayscale(0%) opacity(1);
+	color: var(--text-secondary);
+} */
+
+.m-footer-elm:hover {
+    color: var(--text-secondary);
+	filter: grayscale(0%) opacity(1);
+    transition: width 1500ms ease;
+}
+
+@media only screen and (max-width: 600px) {
+    footer.m-footer {
+        padding-bottom: 8rem;
+    }
+}

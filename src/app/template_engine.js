@@ -1,4 +1,4 @@
-const m_app = "root";
+export let m_app = "root";
 
 let routes = {};
 let templates = {};
@@ -26,30 +26,82 @@ export let add_route = (path, template) =>
     }
 };
 
-reg_template('Root', () => 
+/*
+ * DELETE LATER
+*/
+
+
+reg_template('root', () => 
 {
     let myDiv = window.document.getElementById(m_app);
     myDiv.innerHTML = "";
-    const link1 = createLink('view1', 'Go to view1', '#/Music');
-    const link2 = createLink('view2', 'Go to view2', '#/view2');
-    myDiv.appendChild(link1);
-    return myDiv.appendChild(link2);
+    const link1 = createLink('music', 'Go to music', '#/music');
+    const link2 = createLink('profile', 'Go to profiles', '#/profile');
+    // myDiv.appendChild(link1);
+    // return myDiv.appendChild(link2);
 });
-    
-reg_template('template-view2', () => 
+
+reg_template('music', () => 
 {
     let myDiv = window.document.getElementById(m_app);
     myDiv.innerHTML = "";
-    const link2 = createDiv('view2', `<div><h1>This is View 2 </h1><a href='#/'>Go Back to Index</a></div>`);
+    const link1 = createDiv('music',
+        `<div class="m-content" id="m-content">
+        <div class="m-content-lyrics">
+            <h1 class="m-content-lyrics-title">
+                Fly Me To The Moon					<br>
+            </h1>
+            <div class="m-content-lyrics-a-group">
+                <h3>By: The Maracons Project</h3>
+                <p class="m-content-lyrics">
+                    Fly me to the moon 					<br>
+                    Let me play among the stars 		<br>
+                    And let me see what spring is like	<br>
+                    On a-Jupiter and Mars 				<br>
+                    In other words, hold my hand 		<br>
+                    In other words, baby, kiss me 		<br>
+                                                        <br>
+                    Fill my heart with song 			<br>
+                    And let me sing forevermore 		<br>
+                    You are all I long for 				<br>
+                    All I worship and adore 			<br>
+                    In other words, please be true 		<br>
+                    In other words, I love you 			<br>
+                                                        <br>
+                    Fill my heart with song				<br>
+                    Let me sing forevermore				<br>
+                    You are all I long for				<br>
+                    All I worship and adore				<br>
+                    In other words, please be true		<br>
+                    In other words, in other words		<br>
+                    I love you 							<br>
+                </p>
+                </div>	
+            </div>
+        </div>`
+    );
+    return myDiv.appendChild(link1);
+});
+
+reg_template('profile', () => 
+{
+    let myDiv = window.document.getElementById(m_app);
+    myDiv.innerHTML = "";
+    const link2 = createDiv('profile', `<div><h1>This is View 2 </h1><a href='#/'>Go Back to Index</a></div>`);
     return myDiv.appendChild(link2);
 });
 
-// Map the route->template.
-add_route('/', 'Root');
-add_route('/view2', 'template-view2');
+add_route('/', 'root');
+add_route('/music', 'music');
+add_route('/profile', 'profile');
+
+/*
+ * DELETE LATER
+ */
+
 
 // Generate DOM tree from a string
-let createDiv = (id, xml_string_or_callback) => 
+export let createDiv = (id, xml_string_or_callback) => 
 {
     let d = window.document.createElement('div');
     d.id = id;
@@ -66,7 +118,7 @@ let createDiv = (id, xml_string_or_callback) =>
 };
 
 // Helper function to create a link.
-let createLink = (title, text, href) => 
+export let createLink = (title, text, href) => 
 {
     let a = window.document.createElement('a');
     let linkText = window.document.createTextNode(text);
@@ -100,4 +152,3 @@ let router = (evt) =>
 // For first load or when routes are changed in browser url box.
 window.addEventListener('load', router);
 window.addEventListener('hashchange', router);
-
