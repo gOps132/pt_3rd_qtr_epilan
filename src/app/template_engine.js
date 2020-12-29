@@ -1,5 +1,6 @@
 export let m_app = "root";
 
+
 let routes = {};
 let templates = {};
 
@@ -27,10 +28,8 @@ export let add_route = (path, template) =>
 };
 
 /*
- * DELETE LATER
+ * EXPORT TO CLEANER ENV
 */
-
-
 reg_template('root', () => 
 {
     let myDiv = window.document.getElementById(m_app);
@@ -94,7 +93,6 @@ reg_template('profile', () =>
 add_route('/', 'root');
 add_route('/music', 'music');
 add_route('/profile', 'profile');
-
 /*
  * DELETE LATER
  */
