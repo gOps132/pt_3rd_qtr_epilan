@@ -1,6 +1,10 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack'); //to access built-in plugins
 const path = require('path');
+
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+// const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
+// var public_css = new ExtractTextWebpackPlugin("public.css");
 
 module.exports = {
 	mode: 'production',
@@ -12,17 +16,16 @@ module.exports = {
 	module: {
     rules: [
 			{
-				test: /\.css$/i,
-				use: ['style-loader', 'css-loader'],
-			},
-			{
-				test: /\.html$/i,
-				loader: 'html-loader',
+				test: /\.css$/,
+				use: [
+					'style-loader',
+					'css-loader'
+				]
 			},
     	],
 	},
 	plugins: [
 		new webpack.ProgressPlugin(),
-		new HtmlWebpackPlugin({template: './src/index.html'})	
+		new HtmlWebpackPlugin({template: './src/index.html'}),
 	]
-}	
+}

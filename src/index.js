@@ -1,7 +1,6 @@
 import * as theme from "./app/theme.js";
 import * as router from "./app/template_engine.js"
 
-import "./pages/app.js";
+import * as pages from "./pages/pages.import.js";
 
-import html from './index.html';
-import css from "./css/imports.css"
+// import css from "./css/imports.css"

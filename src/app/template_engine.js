@@ -28,7 +28,7 @@ export let add_route = (path, template) =>
 
 reg_template('Root', () => 
 {
-    let myDiv = document.getElementById(m_app);
+    let myDiv = window.document.getElementById(m_app);
     myDiv.innerHTML = "";
     const link1 = createLink('view1', 'Go to view1', '#/Music');
     const link2 = createLink('view2', 'Go to view2', '#/view2');
@@ -38,7 +38,7 @@ reg_template('Root', () =>
     
 reg_template('template-view2', () => 
 {
-    let myDiv = document.getElementById(m_app);
+    let myDiv = window.document.getElementById(m_app);
     myDiv.innerHTML = "";
     const link2 = createDiv('view2', `<div><h1>This is View 2 </h1><a href='#/'>Go Back to Index</a></div>`);
     return myDiv.appendChild(link2);
@@ -51,7 +51,7 @@ add_route('/view2', 'template-view2');
 // Generate DOM tree from a string
 let createDiv = (id, xml_string_or_callback) => 
 {
-    let d = document.createElement('div');
+    let d = window.document.createElement('div');
     d.id = id;
 
     if(typeof xml_string_or_callback == "function")
@@ -68,8 +68,8 @@ let createDiv = (id, xml_string_or_callback) =>
 // Helper function to create a link.
 let createLink = (title, text, href) => 
 {
-    let a = document.createElement('a');
-    let linkText = document.createTextNode(text);
+    let a = window.document.createElement('a');
+    let linkText = window.document.createTextNode(text);
     a.appendChild(linkText);
     a.title = title;
     a.href = href;
