@@ -1,0 +1,59 @@
+@import url("./base.css");
+
+.m-content {
+    display: flex;
+    justify-content: center;
+    color: var(--text-primary);
+    text-align: center;
+}
+
+iframe {
+    display: block;
+    margin: 0 auto;
+    /* margin-top: 20px;
+    margin-bottom: 30px; */
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
+    -moz-box-shadow: 4px 4px 14px #000;
+    -webkit-box-shadow: 4px 4px 14px #000;
+    box-shadow: 4px 4px 14px #000;
+    /* -moz-transform: rotate(20deg);
+    -webkit-transform: rotate(20deg);
+    -o-transform: rotate(20deg);
+    -ms-transform: rotate(20deg); */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=.2);
+}
+
+footer.m-footer {
+    display: flex;
+    justify-content: center;
+
+    /* height: 20vh; */
+    padding: 2rem;
+
+    color: var(--text-primary); 
+    background-color: var(--bg-primary);
+    
+    font-size: 0.7rem;
+}
+
+.m-footer-elm {
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    border-color: var(--b-bg-primary);
+
+    width: 30vh;
+}
+
+@media only screen and (max-width: 600px) {
+    footer.m-footer {
+        padding-bottom: 8rem;
+    }
+
+    .m-content {
+		display: flex;
+		flex-direction: column;
+	}
+}
