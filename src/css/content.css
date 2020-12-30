@@ -14,6 +14,18 @@
     flex-direction: column;
 }
 
+.music-page {
+
+}
+
+.profile-page {
+
+}
+
+.movies-page {
+    flex-direction: column;
+}
+
 iframe {
     display: block;
     margin: 0 auto;

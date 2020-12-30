@@ -7,8 +7,12 @@ Website with 5 links
 
 [ ] Cache EVERYTHING
 
-I wish I could redo it with static react next.js SPA so I
-don't have to deal with multiple html fragments without having
-to reload the whole website.
-
 Prob Slow Website :(
+
+###
+    $ npm install
+
+    $ npm scripts start:prod 
+        or
+    $ npm scripts build:prod
+###
