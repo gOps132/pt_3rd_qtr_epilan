@@ -16,9 +16,8 @@ const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-// const TerserPlugin = require("terser-webpack-plugin");
-
 const TerserPlugin = require("terser-webpack-plugin");
+
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
@@ -30,6 +29,14 @@ module.exports = merge(common, {
 		filename: '[hash].js'
 	},
 	module: {
+	resolve: {
+		alias: { 
+			Pages: path.resolve(__dirname, './src/pages/'),
+			Assets: path.resolve(__dirname, './src/assets/'),
+			App: path.resolve(__dirname, './src/app/'),
+			CSS: path.resolve(__dirname, './src/css/'),
+		},
+	},
     rules: [
 			{
 				test: /\.css$/,

@@ -1,5 +1,9 @@
-export let m_app = 'root';
+import homepage from "Pages/home.html";
+import musicpage from "Pages/music.html";
+import profilepage from "Pages/profile.html";
+import moviespage from "Pages/movies.html";
 
+export let m_app = 'root';
 
 let routes = {};
 let templates = {};
@@ -21,18 +25,11 @@ export let add_route = (path, template) => {
 	}
 };
 
-/*
- * EXPORT TO CLEANER ENV
- */
 reg_template('root', () => {
 	let div = window.document.getElementById(m_app);
 	div.innerHTML = '';
 	const html_content = create_html_content(
-		'root',
-		`<div class="m-content" id="m-content">
-			<h1>This is the home page</h1>
-		<div>`
-	);
+		'root', homepage);
 	div.appendChild(html_content);
 });
 
@@ -41,40 +38,7 @@ reg_template('music', () => {
 	div.innerHTML = '';
 	const html_content =
 		create_html_content(
-			'music', 
-			`<div class="m-content" id="m-content">
-				<div class="m-content-lyrics">
-				<h1 class="m-content-lyrics-title">
-					Fly Me To The Moon					<br>
-				</h1>
-				<div class="m-content-lyrics-a-group">
-					<h3>By: The Maracons Project</h3>
-					<p class="m-content-lyrics">
-						Fly me to the moon 					<br>
-						Let me play among the stars 		<br>
-						And let me see what spring is like	<br>
-						On a-Jupiter and Mars 				<br>
-						In other words, hold my hand 		<br>
-						In other words, baby, kiss me 		<br>
-															<br>
-						Fill my heart with song 			<br>
-						And let me sing forevermore 		<br>
-						You are all I long for 				<br>
-						All I worship and adore 			<br>
-						In other words, please be true 		<br>
-						In other words, I love you 			<br>
-															<br>
-						Fill my heart with song				<br>
-						Let me sing forevermore				<br>
-						You are all I long for				<br>
-						All I worship and adore				<br>
-						In other words, please be true		<br>
-						In other words, in other words		<br>
-						I love you 							<br>
-					</p>
-					</div>	
-				</div>
-			</div>`);
+			'music', musicpage);
 	return div.appendChild(html_content);
 });
 
@@ -82,9 +46,7 @@ reg_template('profile', () => {
 	let div = window.document.getElementById(m_app);
 	div.innerHTML = '';
 	const html_content =
-		create_html_content('profile', `<div class="m-content" id="m-content">
-				<h1>Hello my dudes</h1>
-			</div>`);
+		create_html_content('profile', profilepage);
 	return div.appendChild(html_content);
 });
 
@@ -92,9 +54,7 @@ reg_template('movies', () => {
 	let div = window.document.getElementById(m_app);
 	div.innerHTML = '';
 	const html_content =
-		create_html_content('movies', `<div class="m-content" id="m-content">
-				<h1>Movies that I like</h1>
-			</div>`);
+		create_html_content('movies', moviespage);
 	return div.appendChild(html_content);
 });
 
@@ -102,10 +62,6 @@ add_route('/', 'root');
 add_route('/music', 'music');
 add_route('/profile', 'profile');
 add_route('/movies', 'movies');
-/*
- * DELETE LATER
- */
-
 
 // Generate DOM tree from a string
 export let create_html_content = (id, xml_string_or_callback) => {
