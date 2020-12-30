@@ -9,7 +9,6 @@ Website with 5 links
 
 I wish I could redo it with static react next.js SPA so I
 don't have to deal with multiple html fragments without having
-to reload the whole website; and it's pretty hard to make and run
-SPA without a server :|
+to reload the whole website.
 
 Prob Slow Website :(

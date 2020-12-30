@@ -4,6 +4,7 @@
  */
 
 
+const dev_mode = process.env.NODE_ENV !== 'production'
 const path = require('path');
 
 module.exports = {
@@ -20,7 +21,7 @@ module.exports = {
 					loader: "file-loader",
 					options: {
 						publicPath: 'assets',
-						name: "[name].[ext]",
+						name: dev_mode ? "[hash].[ext]" : "[name].ext",
 						outputPath: "assets"
 					},
 				}

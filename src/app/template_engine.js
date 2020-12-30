@@ -44,8 +44,7 @@ reg_template('music', () =>
 {
     let myDiv = window.document.getElementById(m_app);
     myDiv.innerHTML = "";
-    const link1 = createDiv('music',
-        `<div class="m-content" id="m-content">
+    const link1 = createDiv('music', `<div class="m-content" id="m-content">
         <div class="m-content-lyrics">
             <h1 class="m-content-lyrics-title">
                 Fly Me To The Moon					<br>
@@ -89,6 +88,15 @@ reg_template('profile', () =>
     const link2 = createDiv('profile', `<div><h1>This is View 2 </h1><a href='#/'>Go Back to Index</a></div>`);
     return myDiv.appendChild(link2);
 });
+
+reg_template('Funny Stuff', () => 
+{
+    let myDiv = window.document.getElementById(m_app);
+    myDiv.innerHTML = "";
+    const link2 = createDiv('profile', `<div><h1>This is View 2 </h1><a href='#/'>Go Back to Index</a></div>`);
+    return myDiv.appendChild(link2);
+});
+
 
 add_route('/', 'root');
 add_route('/music', 'music');
