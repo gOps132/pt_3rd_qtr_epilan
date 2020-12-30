@@ -29,20 +29,12 @@ module.exports = merge(common, {
 		filename: '[hash].js'
 	},
 	module: {
-	resolve: {
-		alias: { 
-			Pages: path.resolve(__dirname, './src/pages/'),
-			Assets: path.resolve(__dirname, './src/assets/'),
-			App: path.resolve(__dirname, './src/app/'),
-			CSS: path.resolve(__dirname, './src/css/'),
-		},
-	},
-    rules: [
-			{
-				test: /\.css$/,
-				use: [MiniCssExtractPlugin.loader, 'css-loader'],
-			},
-    	],
+		rules: [
+				{
+					test: /\.css$/,
+					use: [MiniCssExtractPlugin.loader, 'css-loader'],
+				},
+			],
 	},
 	plugins: [
 		new webpack.ProgressPlugin(),

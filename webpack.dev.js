@@ -19,14 +19,6 @@ module.exports = merge(common, {
 		filename: 'main.js',
 		publicPath: '/',
 	},
-	resolve: {
-		alias: { 
-			Pages: path.resolve(__dirname, './src/pages/'),
-			Assets: path.resolve(__dirname, './src/assets/'),
-			App: path.resolve(__dirname, './src/app/'),
-			CSS: path.resolve(__dirname, './src/css/'),
-		},
-	},
 	module: {
     rules: [
 			{

@@ -19,7 +19,7 @@
 }
 
 .profile-page {
-
+    flex-direction: column;
 }
 
 .movies-page {
