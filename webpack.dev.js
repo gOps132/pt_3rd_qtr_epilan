@@ -7,47 +7,31 @@
 const webpack = require('webpack'); //to access built-in plugins
 const path = require('path');
 
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { merge } = require("webpack-merge");
+const common = require("./webpack.common.js");
 
-module.exports = {
-	mode: 'production',
-	entry: './src/index.js',
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = merge(common, {
+	mode: 'development',
 	output: {
 		path: path.resolve(__dirname, 'dist'), 
-		filename: 'main.js'
+		filename: 'main.js',
+		publicPath: '/',
 	},
 	module: {
     rules: [
 			{
 				test: /\.css$/,
-				use: [MiniCssExtractPlugin.loader, 'css-loader'],
-			},
-			{
-				test: /\.html$/,
-				use: ["html-loader"]
-			},
-			{
-				test: /\.(svg|png|jpg|gif)$/,
-				use: {
-					loader: "file-loader",
-					options: {
-						// publicPath: (resourcePath, context) => {
-						// 	return path.relative(path.dirname(resourcePath), context) + '/';
-						// },
-						name: "[hash].[ext]",
-						outputPath: "assets"
-					},
-				}
+				use: ['style-loader', 'css-loader'],
 			}
     	],
 	},
-	plugins: [
+	plugins: [	
 		new webpack.ProgressPlugin(),
-		new HtmlWebpackPlugin({template: './src/index.html'}),
-		new MiniCssExtractPlugin({
-			filename: "[name].css",
-			chunkFilename: "[id].css"
-		})
+		new HtmlWebpackPlugin({
+			template: './src/index.html',
+			filename: 'index.html'
+		}),
 	]
-}
+});
