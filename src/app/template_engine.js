@@ -79,7 +79,7 @@ reg_template('profile', () => {
   myDiv.innerHTML = '';
   const link2 = createDiv(
         'profile', 
-        `<div>
+      `<div class="m-content" id="m-content">
             <h1>Hello my dudes</h1>
         </div>`
     );

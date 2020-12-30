@@ -18,8 +18,10 @@ const common = require("./webpack.common.js");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 // const TerserPlugin = require("terser-webpack-plugin");
 
+const TerserPlugin = require("terser-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = merge(common, {
 	mode: 'production',
@@ -37,9 +39,16 @@ module.exports = merge(common, {
 	},
 	plugins: [
 		new webpack.ProgressPlugin(),
+		new OptimizeCssAssetsPlugin(),
+		new TerserPlugin(),
 		new HtmlWebpackPlugin({
             template: './src/index.html',
-            filename: 'index.html'
+			filename: 'index.html',
+			minify: {
+				removeAttributeQuotes: true,
+				collapseWhitespace: true,
+				removeComments: true
+			}
         }),
 		new MiniCssExtractPlugin({
 			filename: "[hash].css",
