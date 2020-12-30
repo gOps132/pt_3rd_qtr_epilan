@@ -17,9 +17,11 @@ footer.m-footer {
     font-size: 0.7rem;
 }
 
-.m-footer-elm {
+.m-footer-elm>*{
     margin-left: 1rem;
     margin-right: 1rem;
+
+    transition: all var(--transition-speed) ease;
 
     color: var(--text-primary);
     border-color: var(--b-bg-primary);
@@ -27,17 +29,15 @@ footer.m-footer {
     width: 40vh;
 }
 
-/* .m-footer-elm > *:hover {
-    transition: width 600ms ease;
+.m-footer-elm > *:hover {
+	filter: grayscale(0%) opacity(1);
+	color: var(--text-secondary);
+}
+
+/* .m-footer-elm:hover {
 	filter: grayscale(0%) opacity(1);
 	color: var(--text-secondary);
 } */
-
-.m-footer-elm:hover {
-    color: var(--text-secondary);
-	filter: grayscale(0%) opacity(1);
-    transition: width 1500ms ease;
-}
 
 @media only screen and (max-width: 600px) {
     footer.m-footer {
