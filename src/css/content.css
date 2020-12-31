@@ -15,7 +15,11 @@
 }
 
 .music-page {
+    flex-direction: column;
+}
 
+.music-page > audio{
+    align-self: center;
 }
 
 .profile-page {

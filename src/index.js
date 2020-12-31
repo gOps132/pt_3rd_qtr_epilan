@@ -1,4 +1,5 @@
-import * as theme from "./app/theme.js";
-import * as router from "./app/template_engine.js"
+import * as theme from "App/theme.js";
+import * as router from "App/template_engine.js"
+import * as music from "App/music.js"
 
-import css from "./css/imports.css"
+import css from "CSS/imports.css"

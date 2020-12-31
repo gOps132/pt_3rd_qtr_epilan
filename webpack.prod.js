@@ -26,7 +26,7 @@ module.exports = merge(common, {
 	mode: 'production',
 	output: {
 		path: path.resolve(__dirname, 'dist'), 
-		filename: '[hash].js'
+		filename: '[name].bundle.js'
 	},
 	module: {
 		rules: [
@@ -54,5 +54,8 @@ module.exports = merge(common, {
 			chunkFilename: "[id].css"
         }),
         new CleanWebpackPlugin(),
-	]
+	],
+	// optimization: {
+	// 	runtimeChunk: 'single',
+	// },
 });
