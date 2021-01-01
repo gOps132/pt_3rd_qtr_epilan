@@ -12,7 +12,7 @@ Prob Slow Website :(
 ###
     $ npm install
 
-    $ npm scripts start:prod 
-        or
-    $ npm scripts build:prod
+    $ npm scripts start:prod // build the project into dist
+    
+    $ npm scripts build:prod // Run webpack-dev-server
 ###

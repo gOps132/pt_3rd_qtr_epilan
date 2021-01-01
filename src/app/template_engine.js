@@ -2,6 +2,8 @@ import homepage from "Pages/home.html";
 import musicpage from "Pages/music.html";
 import profilepage from "Pages/profile.html";
 import moviespage from "Pages/movies.html";
+import other_stuff_1 from "Pages/other_stuff_1.html";
+import other_stuff_2 from "Pages/other_stuff_2.html";
 
 export let m_app = 'root';
 
@@ -58,10 +60,29 @@ reg_template('movies', () => {
 	return div.appendChild(html_content);
 });
 
+reg_template('other_stuff_1', () => {
+	let div = window.document.getElementById(m_app);
+	div.innerHTML = '';
+	const html_content =
+		create_html_content('movies', other_stuff_1);
+	return div.appendChild(html_content);
+});
+
+reg_template('other_stuff_2', () => {
+	let div = window.document.getElementById(m_app);
+	div.innerHTML = '';
+	const html_content =
+		create_html_content('movies', other_stuff_2);
+	return div.appendChild(html_content);
+});
+
+
 add_route('/', 'root');
 add_route('/music', 'music');
 add_route('/profile', 'profile');
 add_route('/movies', 'movies');
+add_route('/other_stuff_1', 'other_stuff_1');
+add_route('/other_stuff_2', 'other_stuff_2');
 
 // Generate DOM tree from a string
 export let create_html_content = (id, xml_string_or_callback) => {
