@@ -3,16 +3,17 @@ footer.m-footer {
     justify-content: space-around;
     flex-wrap: wrap;
 
-    top: 0; 
+    /* height: 5rem; */
+    /* top: 0; 
     bottom: 0;
-    left: 0;
+    left: 0; */
 
     padding: 2rem;
 
     color: var(--text-primary); 
     background-color: var(--bg-primary);
     
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 
 .m-footer-elm>*{

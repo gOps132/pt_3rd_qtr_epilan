@@ -1,9 +1,3 @@
-/*
- *	Created By gOps132
- *	12/30/2020 11:46PM
- */
-
-
 const dev_mode = process.env.NODE_ENV !== 'production'
 const path = require('path');
 
