@@ -2,17 +2,17 @@ const gl_matrix = require('gl-matrix');
 
 const RGB_HEX = /^#?(?:([\da-f]{3})[\da-f]?|([\da-f]{6})(?:[\da-f]{2})?)$/i;
 const hex2RGB = str => {
-	const [ , short, long ] = String(str).match(RGB_HEX) || [];
+	const [, short, long] = String(str).match(RGB_HEX) || [];
 	if (long) {
 		const value = Number.parseInt(long, 16);
-		return [ value >> 16, value >> 8 & 0xFF, value & 0xFF ];
+		return [value >> 16, value >> 8 & 0xFF, value & 0xFF];
 	} else if (short) {
-		return Array.from(short, s => Number.parseInt(s, 16)).map(n => (n << 4) | n);
+		return Array.from(short, s => Number.parseInt(s, 16))
+			.map(n => (n << 4) | n);
 	}
 };
 
-function
-	init_webgl() {
+function init_webgl() {
 	const canvas = document.getElementById('webgl-page-canvas');
 	const gl = canvas.getContext('webgl');
 
@@ -24,34 +24,39 @@ function
 
 	const vsSource = `
 		attribute vec4 aVertexPosition;
+		attribute vec4 aVertexColor;
 
 		uniform mat4 uModelViewMatrix;
 		uniform mat4 uProjectionMatrix;
 
-		void main() {
+		varying lowp vec4 vColor;
+
+		void main(void) {
 		gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
+		vColor = aVertexColor;
 		}
 `;
 
 	var fsSource = `
-		  void main() {
-			gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-		  }
-		`;
+		varying lowp vec4 vColor;
+
+		void main(void) {
+		gl_FragColor = vColor;
+		}
+	`;
 
 	const shaderProgram = initShaderProgram(gl, vsSource, fsSource);
 
 	const programInfo = {
 		program: shaderProgram,
 		attribLocations: {
-			vertexPosition:
-				gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
+			vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
+			vertexColor: gl.getAttribLocation(shaderProgram, 'aVertexColor'),
 		},
 		uniformLocations: {
 			projectionMatrix:
 				gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
-			modelViewMatrix:
-				gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
+			modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
 		},
 	};
 
@@ -101,30 +106,32 @@ function loadShader(gl, type, source) {
 }
 
 function initBuffers(gl) {
-
 	const positionBuffer = gl.createBuffer();
-
-
-	gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-
+	const colorBuffer = gl.createBuffer();
 
 	const positions = [
-		-1.0,
-		1.0,
-		1.0,
-		1.0,
-		-1.0,
-		-1.0,
-		1.0,
-		-1.0,
+		1.0,  1.0,
+	   -1.0,  1.0,
+		1.0, -1.0,
+	   -1.0, -1.0,
+	 ];
+
+	const colors = [
+		1.0, 1.0, 1.0, 1.0,  // white
+		1.0, 0.0, 0.0, 1.0,  // red
+		0.0, 1.0, 0.0, 1.0,  // green
+		0.0, 0.0, 1.0, 1.0,  // blue
 	];
 
+	gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
 
-	gl.bufferData(
-		gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
+	gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
 
 	return {
 		position: positionBuffer,
+		color: colorBuffer,
 	};
 }
 
@@ -132,13 +139,14 @@ function drawScene(gl, programInfo, buffers) {
 	// var style = getComputedStyle(document.body);
 	// var main_bg_color = hex2RGB(style.getPropertyValue('--bg-primary')
 	// 				.replace('#',''));
-	// gl.clearColor(main_bg_color[0],main_bg_color[1],main_bg_color[2], 1.0);  // Clear to black, fully opaque
-	
-	gl.clearColor(0,0,0, 1.0);  // Clear to black, fully opaque
+	// gl.clearColor(main_bg_color[0],main_bg_color[1],main_bg_color[2], 1.0);  //
+	// Clear to black, fully opaque
 
-	gl.clearDepth(1.0);                 // Clear everything
-	gl.enable(gl.DEPTH_TEST);           // Enable depth testing
-	gl.depthFunc(gl.LEQUAL);            // Near things obscure far things
+	gl.clearColor(0, 0, 0, 1.0);  // Clear to black, fully opaque
+
+	gl.clearDepth(1.0);        // Clear everything
+	gl.enable(gl.DEPTH_TEST);  // Enable depth testing
+	gl.depthFunc(gl.LEQUAL);   // Near things obscure far things
 
 	// Clear the canvas before we start drawing on it.
 	gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -173,21 +181,32 @@ function drawScene(gl, programInfo, buffers) {
 		modelViewMatrix,     // matrix to translate
 		[-0.0, 0.0, -6.0]);  // amount to translate
 
-	// Tell WebGL how to pull out the positions from the position
-	// buffer into the vertexPosition attribute.
 	{
-		const numComponents = 2;  // pull out 2 values per iteration
-		const type = gl.FLOAT;    // the data in the buffer is 32bit floats
-		const normalize = false;  // don't normalize
-		const stride =
-			0;  // how many bytes to get from one set of values to the next
-		// 0 = use type and numComponents above
-		const offset = 0;  // how many bytes inside the buffer to start from
+		const numComponents = 2;
+		const type = gl.FLOAT;
+		const normalize = false;
+		const stride = 0;
+		const offset = 0;
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffers.position);
 		gl.vertexAttribPointer(
 			programInfo.attribLocations.vertexPosition, numComponents, type,
 			normalize, stride, offset);
 		gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
+	}
+
+	// Tell WebGL how to pull out the positions from the position
+	// buffer into the vertexPosition attribute.
+	{
+		const numComponents = 4;
+		const type = gl.FLOAT;
+		const normalize = false;
+		const stride = 0;
+		const offset = 0;
+		gl.bindBuffer(gl.ARRAY_BUFFER, buffers.color);
+		gl.vertexAttribPointer(
+			programInfo.attribLocations.vertexColor, numComponents, type, normalize,
+			stride, offset);
+		gl.enableVertexAttribArray(programInfo.attribLocations.vertexColor);
 	}
 
 	// Tell WebGL to use our program when drawing
@@ -197,8 +216,7 @@ function drawScene(gl, programInfo, buffers) {
 	// Set the shader uniforms
 
 	gl.uniformMatrix4fv(
-		programInfo.uniformLocations.projectionMatrix, false,
-		projectionMatrix);
+		programInfo.uniformLocations.projectionMatrix, false, projectionMatrix);
 	gl.uniformMatrix4fv(
 		programInfo.uniformLocations.modelViewMatrix, false, modelViewMatrix);
 
