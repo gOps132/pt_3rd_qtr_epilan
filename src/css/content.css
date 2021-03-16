@@ -10,44 +10,6 @@
     text-align: center;
 }
 
-.home-page {
-    flex-direction: column;
-}
-
-.music-page {
-    flex-direction: column;
-}
-
-.music-page > audio{
-    align-self: center;
-}
-
-.profile-page {
-    flex-direction: column;
-}
-
-.movies-page {
-    flex-direction: column;
-}
-
-iframe {
-    display: block;
-    margin: 0 auto;
-    /* margin-top: 20px;
-    margin-bottom: 30px; */
-    -moz-border-radius: 12px;
-    -webkit-border-radius: 12px;
-    border-radius: 12px;
-    -moz-box-shadow: 4px 4px 14px #000;
-    -webkit-box-shadow: 4px 4px 14px #000;
-    box-shadow: 4px 4px 14px #000;
-    /* -moz-transform: rotate(20deg);
-    -webkit-transform: rotate(20deg);
-    -o-transform: rotate(20deg);
-    -ms-transform: rotate(20deg); */
-    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=.2);
-}
-
 @media only screen and (max-width: 600px) {
     .m-content {
 		display: flex;

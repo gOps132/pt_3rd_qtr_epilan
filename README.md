@@ -1,18 +1,9 @@
-# 2ND QTR MAIN PT COMPUTER
+# 3RD QTR MAIN PT COMPUTER
 ## Epilan Gian Cedrick G. 9 - Kowalski
-
-Website with 5 links
-
-[ ] Create a static single-page-application
-
-[ ] Cache EVERYTHING
-
-Prob Slow Website :(
-
 ###
-    $ npm install
+    $ npm install               // install npm packages
 
-    $ npm scripts start:prod // build the project into dist
-    
-    $ npm scripts build:prod // Run webpack-dev-server
+    $ npm scripts build:prod    // build dist into production mode
+
+    $ npm scripts start:prod    // start webpack server with with production configuration
 ###
