@@ -12,6 +12,8 @@ const hex2RGB = str => {
 	}
 };
 
+var squareRotation = 0.0;
+
 function init_webgl() {
 	const canvas = document.getElementById('webgl-page-canvas');
 	const gl = canvas.getContext('webgl');
@@ -59,10 +61,23 @@ function init_webgl() {
 			modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
 		},
 	};
-
+	// Here's where we call the routine that builds all the
+	// objects we'll be drawing.
 	const buffers = initBuffers(gl);
 
-	drawScene(gl, programInfo, buffers);
+	var then = 0;
+
+	// Draw the scene repeatedly
+	function render(now) {
+		now *= 0.001;  // convert to seconds
+		const deltaTime = now - then;
+		then = now;
+
+		drawScene(gl, programInfo, buffers, deltaTime);
+
+		requestAnimationFrame(render);
+	}
+	requestAnimationFrame(render);
 }
 
 function initShaderProgram(gl, vsSource, fsSource) {
@@ -89,10 +104,7 @@ function loadShader(gl, type, source) {
 
 
 	gl.shaderSource(shader, source);
-
-
 	gl.compileShader(shader);
-
 
 	if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
 		alert(
@@ -110,11 +122,11 @@ function initBuffers(gl) {
 	const colorBuffer = gl.createBuffer();
 
 	const positions = [
-		1.0,  1.0,
-	   -1.0,  1.0,
+		1.0, 1.0,
+		-1.0, 1.0,
 		1.0, -1.0,
-	   -1.0, -1.0,
-	 ];
+		-1.0, -1.0,
+	];
 
 	const colors = [
 		1.0, 1.0, 1.0, 1.0,  // white
@@ -135,7 +147,7 @@ function initBuffers(gl) {
 	};
 }
 
-function drawScene(gl, programInfo, buffers) {
+function drawScene(gl, programInfo, buffers, deltaTime) {
 	// var style = getComputedStyle(document.body);
 	// var main_bg_color = hex2RGB(style.getPropertyValue('--bg-primary')
 	// 				.replace('#',''));
@@ -181,6 +193,12 @@ function drawScene(gl, programInfo, buffers) {
 		modelViewMatrix,     // matrix to translate
 		[-0.0, 0.0, -6.0]);  // amount to translate
 
+	gl_matrix.mat4.rotate(modelViewMatrix,  // destination matrix
+		modelViewMatrix,  // matrix to rotate
+		squareRotation,   // amount to rotate in radians
+
+		[0, 0, 1]);       // axis to rotate around
+
 	{
 		const numComponents = 2;
 		const type = gl.FLOAT;
@@ -225,6 +243,9 @@ function drawScene(gl, programInfo, buffers) {
 		const vertexCount = 4;
 		gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);
 	}
+
+	// Update the rotation for the next draw
+	squareRotation += deltaTime;
 }
 
 window.onload = init_webgl;
