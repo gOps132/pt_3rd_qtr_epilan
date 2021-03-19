@@ -1,16 +1,16 @@
 import homepage from "Pages/home.html";
 import webgl_page from "Pages/webgl.html";
 
-export const root_div = window.document.getElementById("root");
+const root_div = window.document.getElementById("root");
 
 let routes = {};
 let templates = {};
 
-export let reg_template = (template_name, template_callback) => {
+let reg_template = (template_name, template_callback) => {
   return templates[template_name] = template_callback;
 };
 
-export let add_route = (path, template) => {
+let add_route = (path, template) => {
 	if (typeof template == 'function') {
 		return routes[path] = template;
 	} else if (typeof template == 'string') {
@@ -20,7 +20,16 @@ export let add_route = (path, template) => {
 	}
 };
 
-export let create_html_content = (id, xml_string_or_callback) => {
+let gen_template = (template_name, page_id, template_xml) => {
+	reg_template(template_name, () => {
+		root_div.innerHTML = '';
+		const html_content = create_html_content(
+			page_id, template_xml);
+		root_div.appendChild(html_content);
+	});
+}
+
+let create_html_content = (id, xml_string_or_callback) => {
 	let d = window.document.createElement('div');
 	d.id = id;
 
@@ -47,18 +56,20 @@ let router = (evt) => {
 	routeResolved();
 };
 
-reg_template('root', () => {
-	root_div.innerHTML = '';
-	const html_content = create_html_content(
-		'root', homepage);
-	root_div.appendChild(html_content);
-});
-reg_template('webgl', () => {
-	root_div.innerHTML = '';
-	const html_content = create_html_content(
-		'webgl-page', webgl_page);
-	root_div.appendChild(html_content);
-});
+gen_template('root', 'root', homepage);
+gen_template('webgl', 'webgl-page', webgl_page);
+// reg_template('root', () => {
+// 	root_div.innerHTML = '';
+// 	const html_content = create_html_content(
+// 		'root', homepage);
+// 	root_div.appendChild(html_content);
+// });
+// reg_template('webgl', () => {
+// 	root_div.innerHTML = '';
+// 	const html_content = create_html_content(
+// 		'webgl-page', webgl_page);
+// 	root_div.appendChild(html_content);
+// });
 
 add_route('/', 'root');
 add_route('/webgl', 'webgl');
