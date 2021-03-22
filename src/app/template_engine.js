@@ -1,6 +1,9 @@
 import homepage from "Pages/home.html";
 import webgl_page from "Pages/webgl.html";
 import planet_page from "Pages/planets.html";
+import animals_page from "Pages/animals.html";
+import music_page from "Pages/music.html";
+import shoes_page from "Pages/shoes.html";
 
 const root_div = window.document.getElementById("root");
 
@@ -60,10 +63,16 @@ let router = (evt) => {
 gen_template('root', 'root', homepage);
 gen_template('webgl', 'webgl-page', webgl_page);
 gen_template('planets', 'planet-page', planet_page);
+gen_template('animals', 'animals-page', animals_page);
+gen_template('music', 'music-page', music_page);
+gen_template('shoes', 'shoes-page', shoes_page);
 
 add_route('/', 'root');
 add_route('/webgl', 'webgl');
 add_route('/planets', 'planets');
+add_route('/animals', 'animals');
+add_route('/music', 'music');
+add_route('/shoes', 'shoes');
 
 // For first load or when routes are changed in browser url box.
 window.addEventListener('load', router);

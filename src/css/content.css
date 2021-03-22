@@ -19,6 +19,14 @@
 	flex-direction: column;
 }
 
+.music-page {
+	flex-direction: column;
+}
+
+.music-page > audio {
+	align-self: center;
+}
+
 @media only screen and (max-width: 600px) {
 	.m-content {
 		display: flex;

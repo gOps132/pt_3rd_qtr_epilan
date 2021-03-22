@@ -15,6 +15,7 @@ const gl_matrix = require('gl-matrix');
 var squareRotation = 0.0;
 
 function init_webgl() {
+	console.log("is it working?");
 	const canvas = document.getElementById('webgl-page-canvas');
 	const gl = canvas.getContext('webgl');
 

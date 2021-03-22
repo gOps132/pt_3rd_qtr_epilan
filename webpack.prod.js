@@ -1,13 +1,4 @@
-/*
- *	Created By gOps132
- *	12/29/2020 12:35PM
- *
- *  TODO:
- *      DO AS MUCH AS YOU CAN TO MAKE THE WEBSITE FASTER!
- *  [ ] Minify the css
- *  [ ] Implement caching
- */
-
+//FIXME: webp erased from clean webpack plugin
 
 const webpack = require('webpack'); //to access built-in plugins
 const path = require('path');
@@ -21,6 +12,18 @@ const TerserPlugin = require("terser-webpack-plugin");
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
+// (async () => {
+// 	const img = await imagemin([
+// 			path.resolve(__dirname, './src/assets/img/*/*.{jpg,jpeg,png,webp}').replace(/\\/g, '/')], 
+// 	{
+// 		destination: path.resolve(__dirname, 'dist/assets').replace(/\\/g, '/'),
+// 		plugins: [imageminWebp({ quality: 70 })],
+// 	});
+
+// 	console.log('Images optimized');
+// 	console.log(img);
+// })();
 
 module.exports = merge(common, {
 	mode: 'production',
@@ -49,21 +52,18 @@ module.exports = merge(common, {
 		new OptimizeCssAssetsPlugin(),
 		new TerserPlugin(),
 		new HtmlWebpackPlugin({
-            template: './src/index.html',
+		template: './src/index.html',
 			filename: 'index.html',
 			minify: {
 				removeAttributeQuotes: true,
 				collapseWhitespace: true,
 				removeComments: true
 			}
-        }),
+		}),
 		new MiniCssExtractPlugin({
 			filename: "[hash].css",
 			chunkFilename: "[id].css"
-        }),
-        new CleanWebpackPlugin(),
+		}),
+		new CleanWebpackPlugin(),
 	],
-	// optimization: {
-	// 	runtimeChunk: 'single',
-	// },
 });

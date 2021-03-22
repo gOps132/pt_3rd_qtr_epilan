@@ -26,6 +26,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^5.0.3",
+    "webp-loader": "^0.6.0",
     "webpack": "^5.11.1",
     "webpack-cli": "^4.3.0",
     "webpack-dev-middleware": "^4.0.2",
@@ -35,6 +36,8 @@
   },
   "dependencies": {
     "gl-matrix": "^3.3.0",
+    "imagemin": "^7.0.1",
+    "path": "^0.12.7",
     "text-loader": "0.0.1"
   }
 }
