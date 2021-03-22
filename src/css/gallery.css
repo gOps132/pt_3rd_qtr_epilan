@@ -3,6 +3,13 @@ gallery.gallery-page, gallery.gallery-page > * {
 	margin: 0;
 }
 
+.gallery-page > h1 {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+	color: var(--text-secondary);
+	font-weight: 100;
+}
+
 .gallery-page>.gallery__list>li {
 	list-style: none;
 	list-style-position: outside;
