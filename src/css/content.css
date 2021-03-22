@@ -1,25 +1,26 @@
 #root {
-    min-height: 100vh;
-    margin: 1rem;
+	min-height: 100vh;
+	margin: 1rem;
 }
 
+
 .m-content {
-    display: flex;
-    justify-content: center;
-    color: var(--text-secondary);
-    text-align: center;
+	display: flex;
+	justify-content: center;
+	color: var(--text-secondary);
+	text-align: center;
 }
 
 .home-page {
-    flex-direction: column;
+	flex-direction: column;
 }
 
 .webgl-page {
-    flex-direction: column;
+	flex-direction: column;
 }
 
 @media only screen and (max-width: 600px) {
-    .m-content {
+	.m-content {
 		display: flex;
 		flex-direction: column;
 	}

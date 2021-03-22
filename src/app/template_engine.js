@@ -1,5 +1,6 @@
 import homepage from "Pages/home.html";
 import webgl_page from "Pages/webgl.html";
+import gallery_page from "Pages/gallery.html";
 
 const root_div = window.document.getElementById("root");
 
@@ -58,21 +59,11 @@ let router = (evt) => {
 
 gen_template('root', 'root', homepage);
 gen_template('webgl', 'webgl-page', webgl_page);
-// reg_template('root', () => {
-// 	root_div.innerHTML = '';
-// 	const html_content = create_html_content(
-// 		'root', homepage);
-// 	root_div.appendChild(html_content);
-// });
-// reg_template('webgl', () => {
-// 	root_div.innerHTML = '';
-// 	const html_content = create_html_content(
-// 		'webgl-page', webgl_page);
-// 	root_div.appendChild(html_content);
-// });
+gen_template('gallery', 'gallery-page', gallery_page);
 
 add_route('/', 'root');
 add_route('/webgl', 'webgl');
+add_route('/gallery', 'gallery');
 
 // For first load or when routes are changed in browser url box.
 window.addEventListener('load', router);
